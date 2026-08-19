@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-manrope);
+}
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+  --ink: #0a0a0a;
+  --primary: #111111;
+  --primary-dark: #000000;
+  --accent: #111111;
+  --surface: #f7f7f5;
+  --surface-secondary: #f1f1ef;
+  --muted: #6f6f6b;
+  --border: #e7e7e3;
+  --border-strong: #d6d6d1;
+  --success: #262626;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-padding-top: 110px;
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, sans-serif;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-manrope), var(--font-inter), sans-serif;
+  font-weight: 600;
+}
+button,
+a {
+  cursor: pointer;
+}
+input,
+textarea {
+  cursor: text;
+}
+.section {
+  padding: 8rem 0;
+}
+.text-balance {
+  text-wrap: balance;
+}
+.radial-particle-field {
+  animation: radial-particle-field-enter 800ms ease-out both;
+}
+@keyframes radial-particle-field-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.92;
+  }
+}
+@media (max-width: 640px) {
+  .section {
+    padding: 5rem 0;
+  }
+}
+@media (max-width: 1279px) {
+  .floating-header {
+    top: 10px !important;
+    width: calc(100% - 20px) !important;
+    max-width: 1180px !important;
+    height: 64px !important;
+    border-radius: 20px !important;
+    border-color: rgba(10, 10, 10, 0.08) !important;
+    background: rgba(255, 255, 255, 0.82) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-cursor] {
+    cursor: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .radial-particle-field {
+    animation: none;
+    opacity: 0.9;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

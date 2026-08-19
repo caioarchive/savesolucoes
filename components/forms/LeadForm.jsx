@@ -1,0 +1,160 @@
+"use client";
+
+import { useState } from "react";
+
+import { CheckCircle2, LoaderCircle } from "lucide-react";
+
+import Button from "@/components/ui/Button";
+import FormField from "@/components/ui/FormField";
+
+const fields = {
+  contato: [
+    { name: "nome", label: "Nome", required: true },
+    { name: "telefone", label: "Telefone", required: true },
+    { name: "email", label: "E-mail", type: "email", required: true },
+    { name: "assunto", label: "Assunto", required: true },
+  ],
+  "abrir-empresa": [
+    { name: "nome", label: "Nome completo", required: true },
+    { name: "email", label: "E-mail", type: "email", required: true },
+    { name: "telefone", label: "Telefone", required: true },
+    { name: "celular", label: "Celular", required: true },
+    { name: "estado", label: "Estado", required: true },
+    { name: "cidade", label: "Cidade", required: true },
+  ],
+  "migrar-contabilidade": [
+    { name: "razaoSocial", label: "Razão social", required: true },
+    { name: "cnpj", label: "CNPJ", required: true },
+    { name: "tipoEmpresa", label: "Tipo de empresa", required: true },
+    { name: "telefone", label: "Telefone", required: true },
+    { name: "email", label: "E-mail", type: "email", required: true },
+    {
+      name: "socios",
+      label: "Número de sócios",
+      type: "number",
+      required: true,
+    },
+    {
+      name: "funcionarios",
+      label: "Número de funcionários",
+      type: "number",
+      required: true,
+    },
+  ],
+};
+
+const companySegments = [
+  "Prestação de serviços",
+  "Prestação de serviços e comércio",
+  "Comércio",
+  "Comércio e indústria",
+  "Indústria",
+];
+
+export default function LeadForm({ type = "contato" }) {
+  const [status, setStatus] = useState("idle");
+  const [message, setMessage] = useState("");
+
+  const isLoading = status === "loading";
+  const isSuccess = status === "success";
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setStatus("loading");
+    setMessage("");
+
+    const form = event.currentTarget;
+    const formData = Object.fromEntries(new FormData(form));
+
+    for (const key of ["telefone", "celular", "cnpj"]) {
+      if (formData[key]) {
+        formData[key] = formData[key].replace(/\D/g, "");
+      }
+    }
+
+    try {
+      const response = await fetch(`/api/${type}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message);
+      }
+
+      setStatus("success");
+      setMessage(result.message);
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+      setMessage(error.message || "Não foi possível enviar. Tente novamente.");
+    }
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-[22px] border border-border bg-white p-6 shadow-[0_18px_55px_rgba(0,0,0,0.04)] sm:p-8"
+    >
+      <div className="grid gap-5 sm:grid-cols-2">
+        {fields[type].map((field) => (
+          <FormField key={field.name} {...field} />
+        ))}
+
+        {type === "abrir-empresa" && (
+          <label className="block text-sm font-medium sm:col-span-2">
+            Segmento da empresa *
+            <select
+              name="segmento"
+              required
+              className="mt-2 w-full rounded-xl border border-border bg-white px-4 py-3.5 outline-none focus:border-border-strong focus:ring-4 focus:ring-neutral-100"
+            >
+              <option value="">Selecione</option>
+              {companySegments.map((segment) => (
+                <option key={segment}>{segment}</option>
+              ))}
+            </select>
+          </label>
+        )}
+
+        <div className="sm:col-span-2">
+          <FormField label="Mensagem" name="mensagem" required multiline />
+        </div>
+
+        <label className="flex items-start gap-3 text-sm leading-6 text-muted sm:col-span-2">
+          <input
+            name="autorizacao"
+            value="sim"
+            type="checkbox"
+            required
+            className="mt-1 h-4 w-4 accent-black"
+          />
+          {type === "contato"
+            ? "Autorizo o uso dos dados informados para que a Save entre em contato comigo."
+            : "Autorizo o tratamento dos dados informados para que a Save entre em contato comigo."}
+        </label>
+      </div>
+      <Button
+        type="submit"
+        disabled={isLoading}
+        className="mt-7 w-full sm:w-auto"
+      >
+        {isLoading && <LoaderCircle className="animate-spin" size={18} />}
+        {isLoading ? "Enviando..." : "Enviar informações"}
+      </Button>
+
+      {message && (
+        <p
+          role="status"
+          className="mt-5 flex items-center gap-2 rounded-xl bg-surface p-4 text-sm text-foreground"
+        >
+          {isSuccess && <CheckCircle2 size={18} />}
+          {message}
+        </p>
+      )}
+    </form>
+  );
+}
