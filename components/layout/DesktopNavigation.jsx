@@ -20,7 +20,7 @@ export default function DesktopNavigation({ light = false }) {
 
   const linkClasses = (isActive) => {
     return [
-      "rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:duration-0",
+      "rounded-full px-3.5 py-2 text-base font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:duration-0",
       light
         ? isActive
           ? "bg-white text-neutral-950 hover:bg-neutral-100 hover:text-neutral-950 focus-visible:ring-white focus-visible:ring-offset-neutral-950"

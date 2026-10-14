@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Building2, RefreshCcw } from "lucide-react";
+import { ArrowRight, Building2, RefreshCcw } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import Container from "@/components/layout/Container";
 import FadeUp from "@/components/motion/FadeUp";
@@ -10,11 +10,6 @@ const paths = [
     icon: Building2,
     title: "Quero abrir uma empresa",
     text: "Conte com a Save para cuidar das etapas de constituição, enquadramento e legalização do seu negócio.",
-    benefits: [
-      "Constituição e enquadramento",
-      "Legalização e cadastros",
-      "Orientação desde o início",
-    ],
     label: "Iniciar abertura",
     href: "/abrir-empresa",
   },
@@ -22,23 +17,17 @@ const paths = [
     icon: RefreshCcw,
     title: "Quero mudar de contador",
     text: "Migre sua contabilidade com acompanhamento, organização das informações e uma transição mais tranquila.",
-    benefits: [
-      "Migração acompanhada",
-      "Organização dos documentos",
-      "Continuidade sem complicação",
-    ],
     label: "Migrar para a Save",
     href: "/migrar-contabilidade",
   },
 ];
 
 const pathClasses = [
-  "group flex h-full min-h-[340px] flex-col p-7",
+  "group flex h-full gap-5 rounded-[24px] border border-border-strong bg-white p-6 sm:gap-6 sm:p-8 lg:p-9",
   "transition-[transform,opacity] duration-200 ease-out",
   "hover:-translate-y-0.5 active:scale-[0.98]",
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset",
   "motion-reduce:transform-none motion-reduce:transition-none",
-  "sm:min-h-[350px] sm:p-9 lg:min-h-[360px] lg:p-10",
 ].join(" ");
 
 export default function BusinessPaths() {
@@ -58,14 +47,14 @@ export default function BusinessPaths() {
           </p>
         </FadeUp>
 
-        <div className="mt-8 grid auto-rows-fr overflow-hidden rounded-[24px] border border-border-strong bg-white divide-y divide-border-strong lg:grid-cols-2 lg:divide-x lg:divide-y-0">
+        <div className="mt-8 grid auto-rows-fr gap-5 lg:grid-cols-2 lg:gap-6">
           {paths.map((path, index) => {
             const Icon = path.icon;
 
             return (
               <FadeUp
                 key={path.title}
-                className="h-full bg-white text-foreground"
+                className="h-full text-foreground"
                 delay={index * 0.08}
               >
                 <Link
@@ -73,11 +62,11 @@ export default function BusinessPaths() {
                   data-cursor="Ver"
                   className={`${pathClasses} focus-visible:ring-black`}
                 >
-                  <span className="grid size-12 shrink-0 place-items-center rounded-xl border border-border bg-surface text-black">
+                  <span className="grid size-12 shrink-0 place-items-center rounded-xl border border-border bg-surface text-black sm:size-14">
                     <Icon size={22} strokeWidth={1.7} />
                   </span>
 
-                  <div className="mt-5 flex flex-1 flex-col">
+                  <div className="flex min-w-0 flex-1 flex-col items-start">
                     <h3 className="text-2xl tracking-[-0.025em] sm:text-[1.75rem]">
                       {path.title}
                     </h3>
@@ -85,19 +74,13 @@ export default function BusinessPaths() {
                       {path.text}
                     </p>
 
-                    <ul className="mt-5 space-y-2.5 text-sm text-neutral-700">
-                      {path.benefits.map((benefit) => (
-                        <li
-                          key={benefit}
-                          className="border-l border-neutral-300 pl-3"
-                        >
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <span className="mt-auto inline-flex items-center pt-6 text-sm font-medium">
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium">
                       {path.label}
+                      <ArrowRight
+                        size={18}
+                        strokeWidth={1.7}
+                        aria-hidden="true"
+                      />
                     </span>
                   </div>
                 </Link>

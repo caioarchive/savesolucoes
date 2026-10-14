@@ -12,12 +12,14 @@ function Word({ children, progress, range, reduceMotion }) {
   const opacity = useTransform(progress, range, [0.15, 1]);
 
   return (
-    <motion.span
-      className="mr-[0.25em] inline-block"
-      style={reduceMotion ? { opacity: 1 } : { opacity }}
-    >
-      {children}
-    </motion.span>
+    <>
+      <motion.span
+        className="inline sm:inline-block"
+        style={reduceMotion ? { opacity: 1 } : { opacity }}
+      >
+        {children}
+      </motion.span>{" "}
+    </>
   );
 }
 
@@ -40,7 +42,7 @@ export default function ScrollReadText({
   return (
     <Tag
       ref={textRef}
-      className={`text-balance leading-[1.15] tracking-[-0.035em] ${className}`}
+      className={`text-wrap leading-[1.15] tracking-[-0.035em] sm:text-balance ${className}`}
     >
       {words.map((word, index) => {
         const start = index / words.length;

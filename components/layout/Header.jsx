@@ -86,7 +86,7 @@ export default function Header() {
               rel="noopener noreferrer"
               title="Ambiente externo seguro"
               data-cursor="↗"
-              className={`inline-flex h-12 min-w-[150px] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:duration-0 ${
+              className={`inline-flex h-12 min-w-[150px] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 text-base font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:duration-0 ${
                 isDarkTransparent
                   ? "bg-white text-black hover:bg-neutral-100 focus-visible:ring-white focus-visible:ring-offset-neutral-950"
                   : "bg-black text-white hover:bg-neutral-800 focus-visible:ring-black focus-visible:ring-offset-white"
