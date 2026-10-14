@@ -1,0 +1,49 @@
+.photoReveal {
+  mask-image: linear-gradient(to bottom, transparent 48%, #000 52%);
+  mask-size: 100% 220%;
+  mask-position: 0 0;
+  mask-repeat: no-repeat;
+  transition: mask-position 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.photoReveal[data-visible="true"] {
+  mask-position: 0 100%;
+}
+
+.stepNode {
+  transition:
+    background-color 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stepNode[data-active="true"] {
+  background-color: #171717;
+  border-color: #171717;
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoReveal {
+    mask-image: none !important;
+    transition: none !important;
+  }
+
+  .lineFill {
+    transform: scaleY(1) !important;
+  }
+
+  .reveal,
+  .stepContent,
+  .stepNode {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .stepNode {
+    background-color: #171717;
+    border-color: #171717;
+    color: #fff;
+  }
+}

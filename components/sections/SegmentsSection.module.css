@@ -1,0 +1,82 @@
+/* The image remains color-accurate by default for touch and smaller screens. */
+.segmentImage {
+  filter: none;
+}
+
+.imageVisual::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0 auto 0 0;
+  width: clamp(4rem, 5vw, 5rem);
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(to right, rgb(255 255 255 / 0.46), transparent);
+}
+
+.listingMedia {
+  aspect-ratio: 16 / 9;
+}
+
+.listingImage {
+  transform: scale(1);
+  transition: transform 320ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.listingArrow {
+  transform: translateX(0);
+  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.listingCard:focus-visible .listingImage {
+  transform: scale(1.025);
+}
+
+.listingCard:focus-visible .listingArrow {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transform: none !important;
+  }
+
+  .segmentImage {
+    transition: none !important;
+  }
+
+  .listingImage,
+  .listingArrow {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .listingCard:hover .listingImage {
+    transform: scale(1.025);
+  }
+
+  .listingCard:hover .listingArrow {
+    transform: translateX(4px);
+  }
+}
+
+@media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
+  .stackItem {
+    position: sticky;
+    top: var(--stack-top);
+    z-index: var(--stack-layer);
+  }
+}
+
+@media (min-width: 64rem) and (hover: hover) and (pointer: fine) {
+  .segmentImage {
+    filter: grayscale(100%) saturate(82%) contrast(94%);
+    transition: filter 320ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .homeCard:hover .segmentImage,
+  .homeCard:focus-within .segmentImage {
+    filter: grayscale(0%) saturate(100%) contrast(100%);
+  }
+}

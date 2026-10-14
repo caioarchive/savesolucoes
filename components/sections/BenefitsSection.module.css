@@ -1,0 +1,89 @@
+.viewport {
+  --benefits-fade-size: clamp(1.5rem, 4vw, 3rem);
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black var(--benefits-fade-size),
+    black calc(100% - var(--benefits-fade-size)),
+    transparent 100%
+  );
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  touch-action: pan-y;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black var(--benefits-fade-size),
+    black calc(100% - var(--benefits-fade-size)),
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+}
+
+.shell:has(.viewport:focus-visible) {
+  outline: 2px solid var(--foreground);
+  outline-offset: 4px;
+}
+
+@keyframes benefits-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    animation: benefits-scroll 56s linear infinite;
+    will-change: transform;
+  }
+
+  .shell:focus-within .track,
+  .shell:active .track,
+  .viewport:active .track,
+  .track:active {
+    animation-play-state: paused;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .shell:hover .track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+
+  .viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--benefits-fade-size);
+    scroll-snap-type: x proximity;
+    scrollbar-color: var(--border-strong) transparent;
+    scrollbar-width: thin;
+    touch-action: pan-x pan-y;
+  }
+
+  .duplicate {
+    display: none;
+  }
+
+  .set {
+    padding-inline: var(--benefits-fade-size);
+    padding-bottom: 0.75rem;
+  }
+
+  .item {
+    scroll-snap-align: start;
+  }
+}

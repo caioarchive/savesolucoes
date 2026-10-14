@@ -3,38 +3,24 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-import { services } from "@/data/services";
-import { durations, smoothEase } from "@/lib/motion";
-
-export default function ServicesDropdown({ triggerClassName }) {
-  const shouldReduceMotion = useReducedMotion();
+export default function ServicesDropdown({
+  id,
+  label,
+  items,
+  pathname,
+  triggerClassName,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
   const triggerRef = useRef(null);
-  const menuRef = useRef(null);
 
   function closeMenu({ restoreFocus = false } = {}) {
     setIsOpen(false);
 
     if (restoreFocus) {
       triggerRef.current?.focus();
-    }
-  }
-
-  function focusFirstItem() {
-    requestAnimationFrame(() => {
-      menuRef.current?.querySelector("a")?.focus();
-    });
-  }
-
-  function handleTriggerKeyDown(event) {
-    if (event.key === "ArrowDown") {
-      event.preventDefault();
-      setIsOpen(true);
-      focusFirstItem();
     }
   }
 
@@ -61,56 +47,60 @@ export default function ServicesDropdown({ triggerClassName }) {
   }, [isOpen]);
 
   return (
-    <div ref={containerRef} className="relative">
+    <div
+      ref={containerRef}
+      className="relative"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          closeMenu();
+        }
+      }}
+    >
       <button
         ref={triggerRef}
         type="button"
         className={triggerClassName}
         onClick={() => setIsOpen((current) => !current)}
-        onKeyDown={handleTriggerKeyDown}
         aria-expanded={isOpen}
-        aria-haspopup="menu"
-        aria-controls="services-menu"
+        aria-controls={id}
       >
         <span className="flex items-center gap-1">
-          Serviços
-          <motion.span animate={{ rotate: isOpen ? 180 : 0 }}>
-            <ChevronDown size={14} />
-          </motion.span>
+          {label}
+          <span className={isOpen ? "rotate-180" : undefined}>
+            <ChevronDown size={14} aria-hidden="true" />
+          </span>
         </span>
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            ref={menuRef}
-            id="services-menu"
-            role="menu"
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
-            transition={{
-              duration: shouldReduceMotion ? 0.1 : durations.fast,
-              ease: smoothEase,
-            }}
-            className="absolute left-0 top-full w-80 pt-3"
-          >
-            <div className="rounded-[20px] border border-black/10 bg-white/90 p-2 shadow-[0_18px_50px_rgba(0,0,0,0.08)] backdrop-blur-xl">
-              {services.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={`/servicos/${service.slug}`}
-                  role="menuitem"
-                  onClick={() => closeMenu()}
-                  className="block rounded-xl px-4 py-3 text-sm text-neutral-700 transition-colors duration-200 hover:bg-surface hover:text-black focus-visible:bg-surface focus-visible:text-black focus-visible:outline-none"
-                >
-                  {service.title}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div
+        id={id}
+        hidden={!isOpen}
+        className="absolute left-0 top-full z-30 w-80 pt-3"
+      >
+        <ul className="rounded-[20px] border border-black/10 bg-white/90 p-2 shadow-[0_18px_50px_rgba(0,0,0,0.08)] backdrop-blur-xl">
+          {items.map((item) => (
+            <li
+              key={item.href}
+              className={
+                item.separated ? "mt-2 border-t border-border pt-2" : undefined
+              }
+            >
+              <Link
+                href={item.href}
+                onClick={() => closeMenu()}
+                aria-current={
+                  pathname === item.href || pathname.startsWith(`${item.href}/`)
+                    ? "page"
+                    : undefined
+                }
+                className="block rounded-xl px-4 py-3 text-sm text-neutral-700 transition-colors duration-200 hover:bg-surface hover:text-black focus-visible:bg-surface focus-visible:text-black focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-neutral-950 motion-reduce:duration-0"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

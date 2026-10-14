@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { ArrowRight, Building2, RefreshCcw } from "lucide-react";
-
+import { Building2, RefreshCcw } from "lucide-react";
+import Badge from "@/components/ui/Badge";
 import Container from "@/components/layout/Container";
 import FadeUp from "@/components/motion/FadeUp";
 
@@ -10,6 +10,11 @@ const paths = [
     icon: Building2,
     title: "Quero abrir uma empresa",
     text: "Conte com a Save para cuidar das etapas de constituição, enquadramento e legalização do seu negócio.",
+    benefits: [
+      "Constituição e enquadramento",
+      "Legalização e cadastros",
+      "Orientação desde o início",
+    ],
     label: "Iniciar abertura",
     href: "/abrir-empresa",
   },
@@ -17,51 +22,82 @@ const paths = [
     icon: RefreshCcw,
     title: "Quero mudar de contador",
     text: "Migre sua contabilidade com acompanhamento, organização das informações e uma transição mais tranquila.",
+    benefits: [
+      "Migração acompanhada",
+      "Organização dos documentos",
+      "Continuidade sem complicação",
+    ],
     label: "Migrar para a Save",
     href: "/migrar-contabilidade",
   },
 ];
 
-const cardClasses = [
-  "group flex h-full flex-col gap-8",
-  "rounded-[22px] border border-border bg-white p-8",
-  "transition duration-300 hover:-translate-y-1 hover:scale-[1.01]",
-  "hover:border-border-strong hover:shadow-[0_18px_55px_rgba(0,0,0,0.05)]",
-  "sm:flex-row sm:items-start",
+const pathClasses = [
+  "group flex h-full min-h-[340px] flex-col p-7",
+  "transition-[transform,opacity] duration-200 ease-out",
+  "hover:-translate-y-0.5 active:scale-[0.98]",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset",
+  "motion-reduce:transform-none motion-reduce:transition-none",
+  "sm:min-h-[350px] sm:p-9 lg:min-h-[360px] lg:p-10",
 ].join(" ");
 
 export default function BusinessPaths() {
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="bg-neutral-100 py-12 sm:py-14 lg:py-16">
       <Container>
-        <div className="grid gap-5 lg:grid-cols-2">
+        <FadeUp className="text-left md:text-center">
+          <div className="mb-4 md:flex md:justify-center">
+            <Badge>Próximo passo</Badge>
+          </div>
+          <h2 className="text-balance text-3xl tracking-[-0.035em] text-foreground sm:text-4xl md:mx-auto md:max-w-3xl">
+            Vai abrir uma empresa ou mudar de contador?
+          </h2>
+          <p className="mt-3 max-w-2xl text-base leading-7 text-muted sm:text-lg md:mx-auto">
+            Escolha o caminho e conheça como a Save pode acompanhar esse
+            processo.
+          </p>
+        </FadeUp>
+
+        <div className="mt-8 grid auto-rows-fr overflow-hidden rounded-[24px] border border-border-strong bg-white divide-y divide-border-strong lg:grid-cols-2 lg:divide-x lg:divide-y-0">
           {paths.map((path, index) => {
             const Icon = path.icon;
 
             return (
-              <FadeUp key={path.title} delay={index * 0.08}>
+              <FadeUp
+                key={path.title}
+                className="h-full bg-white text-foreground"
+                delay={index * 0.08}
+              >
                 <Link
                   href={path.href}
                   data-cursor="Ver"
-                  className={cardClasses}
+                  className={`${pathClasses} focus-visible:ring-black`}
                 >
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-surface text-black">
+                  <span className="grid size-12 shrink-0 place-items-center rounded-xl border border-border bg-surface text-black">
                     <Icon size={22} strokeWidth={1.7} />
                   </span>
 
-                  <div>
-                    <h2 className="text-2xl tracking-[-0.025em]">
+                  <div className="mt-5 flex flex-1 flex-col">
+                    <h3 className="text-2xl tracking-[-0.025em] sm:text-[1.75rem]">
                       {path.title}
-                    </h2>
+                    </h3>
                     <p className="mt-3 max-w-lg leading-7 text-muted">
                       {path.text}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium">
+
+                    <ul className="mt-5 space-y-2.5 text-sm text-neutral-700">
+                      {path.benefits.map((benefit) => (
+                        <li
+                          key={benefit}
+                          className="border-l border-neutral-300 pl-3"
+                        >
+                          {benefit}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <span className="mt-auto inline-flex items-center pt-6 text-sm font-medium">
                       {path.label}
-                      <ArrowRight
-                        className="transition-transform duration-200 group-hover:translate-x-1"
-                        size={16}
-                      />
                     </span>
                   </div>
                 </Link>

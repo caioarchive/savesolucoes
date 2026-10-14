@@ -11,26 +11,42 @@ import Container from "@/components/layout/Container";
 import FadeUp from "@/components/motion/FadeUp";
 import Logo from "@/components/ui/Logo";
 
-import { navigation } from "@/data/navigation";
+import { footerNavigation } from "@/data/navigation";
+
+const footerLinkClass =
+  "transition-colors duration-200 hover:text-white focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink pt-20 text-neutral-300">
+    <footer className="bg-neutral-950 text-neutral-300">
       <Container>
-        <FadeUp className="grid gap-12 border-b border-white/10 pb-14 md:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <Logo light />
-            <p className="mt-6 max-w-xs leading-7 text-neutral-400">
+        <FadeUp className="grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_1.15fr_1fr] lg:gap-10 lg:py-16">
+          <div className="min-w-0">
+            <div className="w-fit rounded-sm focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-white">
+              <Logo light />
+            </div>
+            <p className="mt-6 max-w-xs text-sm leading-7 text-neutral-300">
               Soluções contábeis e empresariais com organização, tecnologia e
               atendimento próximo.
             </p>
+            <a
+              className={`mt-7 inline-flex items-center gap-2 text-sm ${footerLinkClass}`}
+              href="https://www.instagram.com/save.solucoes/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="↗"
+            >
+              <Instagram size={17} aria-hidden="true" />
+              @save.solucoes
+            </a>
           </div>
-          <div>
-            <h3 className="font-semibold text-white">Navegação</h3>
-            <div className="mt-4 grid gap-3">
-              {navigation.slice(1).map((item) => (
+
+          <nav aria-label="Navegação do rodapé">
+            <h3 className="text-sm font-semibold text-white">Navegação</h3>
+            <div className="mt-5 grid gap-3">
+              {footerNavigation.map((item) => (
                 <Link
-                  className="text-sm hover:text-white"
+                  className={`w-fit text-sm ${footerLinkClass}`}
                   href={item.href}
                   key={item.href}
                 >
@@ -38,65 +54,82 @@ export default function Footer() {
                 </Link>
               ))}
             </div>
-          </div>
-          <div>
-            <h3 className="font-semibold text-white">Contato</h3>
-            <div className="mt-4 space-y-3 text-sm">
+          </nav>
+
+          <div className="min-w-0">
+            <h3 className="text-sm font-semibold text-white">Atendimento</h3>
+            <div className="mt-5 grid gap-4 text-sm leading-6">
               <a
-                className="flex gap-2 hover:text-white"
+                className={`flex w-fit items-start gap-3 ${footerLinkClass}`}
                 href="https://wa.me/558234351890"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="↗"
               >
-                <MessageCircle size={17} /> (82) 3435-1890
+                <MessageCircle
+                  size={17}
+                  className="mt-1 shrink-0"
+                  aria-hidden="true"
+                />
+                (82) 3435-1890
               </a>
               <a
-                className="flex gap-2 hover:text-white"
+                className={`flex min-w-0 w-fit items-start gap-3 break-all ${footerLinkClass}`}
                 href="mailto:contato@savesolucoes.com.br"
               >
-                <Mail size={17} /> contato@savesolucoes.com.br
+                <Mail size={17} className="mt-1 shrink-0" aria-hidden="true" />
+                contato@savesolucoes.com.br
               </a>
+            </div>
+          </div>
+
+          <div className="min-w-0">
+            <h3 className="text-sm font-semibold text-white">Onde estamos</h3>
+            <div className="mt-5 flex gap-3 text-sm leading-6">
+              <MapPin size={18} className="mt-1 shrink-0" aria-hidden="true" />
+              <address className="not-italic">
+                <span className="block">
+                  Av. Menino Marcelo, 9350, Sala 315
+                </span>
+                <span className="block">Empresarial Humberto Lobo</span>
+                <span className="block">Maceió - AL, CEP 57046-000</span>
+              </address>
+            </div>
+            <div className="mt-5 flex flex-col items-start gap-3 text-sm">
               <a
-                className="flex gap-2 hover:text-white"
-                href="https://www.instagram.com/save.solucoes/"
+                className={`inline-flex items-center gap-2 ${footerLinkClass}`}
+                href="https://www.google.com/maps/search/?api=1&query=Av.%20Menino%20Marcelo%2C%209350%2C%20Macei%C3%B3%20AL"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="↗"
               >
-                <Instagram size={17} /> @save.solucoes
+                Como chegar <ExternalLink size={14} aria-hidden="true" />
+              </a>
+              <a
+                className={`inline-flex items-center gap-2 font-medium text-white ${footerLinkClass}`}
+                href="https://meucontador.nibo.com.br/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="↗"
+              >
+                Área do cliente <ExternalLink size={14} aria-hidden="true" />
               </a>
             </div>
           </div>
-          <div>
-            <h3 className="font-semibold text-white">Onde estamos</h3>
-            <p className="mt-4 flex gap-2 text-sm leading-6 text-neutral-400">
-              <MapPin size={18} className="shrink-0" />
-              Av. Menino Marcelo, 9350, Sala 315
-              <br />
-              Empresarial Humberto Lobo
-              <br />
-              Maceió – AL, CEP 57046-000
-            </p>
-            <a
-              className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-white"
-              href="https://meucontador.nibo.com.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="↗"
-            >
-              Área do cliente <ExternalLink size={14} />
-            </a>
-          </div>
         </FadeUp>
-        <div className="flex flex-col gap-4 py-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+
+        <div className="flex flex-col gap-4 border-t border-white/15 py-6 text-xs text-neutral-300 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} Save Soluções. Todos os direitos
             reservados.
           </p>
-          <div className="flex gap-5">
-            <Link href="/politica-de-privacidade">Privacidade</Link>
-            <Link href="/termos-de-uso">Termos de uso</Link>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            <Link className={footerLinkClass} href="/politica-de-privacidade">
+              Privacidade
+            </Link>
+            <Link className={footerLinkClass} href="/termos-de-uso">
+              Termos de uso
+            </Link>
           </div>
         </div>
       </Container>

@@ -28,18 +28,6 @@ const fields = {
     { name: "tipoEmpresa", label: "Tipo de empresa", required: true },
     { name: "telefone", label: "Telefone", required: true },
     { name: "email", label: "E-mail", type: "email", required: true },
-    {
-      name: "socios",
-      label: "Número de sócios",
-      type: "number",
-      required: true,
-    },
-    {
-      name: "funcionarios",
-      label: "Número de funcionários",
-      type: "number",
-      required: true,
-    },
   ],
 };
 
@@ -51,10 +39,17 @@ const companySegments = [
   "Indústria",
 ];
 
-export default function LeadForm({ type = "contato" }) {
+export default function LeadForm({
+  type = "contato",
+  variant = "default",
+  title,
+  description,
+  initialSubject,
+}) {
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
 
+  const isSidebar = variant === "sidebar";
   const isLoading = status === "loading";
   const isSuccess = status === "success";
 
@@ -97,11 +92,39 @@ export default function LeadForm({ type = "contato" }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-[22px] border border-border bg-white p-6 shadow-[0_18px_55px_rgba(0,0,0,0.04)] sm:p-8"
+      className={
+        isSidebar
+          ? "rounded-[22px] border border-border bg-white p-5 shadow-[0_18px_55px_rgba(0,0,0,0.04)] sm:p-6"
+          : "rounded-[22px] border border-border bg-white p-6 shadow-[0_18px_55px_rgba(0,0,0,0.04)] sm:p-8"
+      }
     >
-      <div className="grid gap-5 sm:grid-cols-2">
+      {isSidebar && (title || description) ? (
+        <div className="mb-4">
+          {title ? (
+            <h2 className="text-xl tracking-[-0.025em] text-foreground">
+              {title}
+            </h2>
+          ) : null}
+          {description ? (
+            <p className="mt-2 text-sm leading-6 text-neutral-700">
+              {description}
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+      <div
+        className={
+          isSidebar ? "grid gap-4 xl:grid-cols-2" : "grid gap-5 sm:grid-cols-2"
+        }
+      >
         {fields[type].map((field) => (
-          <FormField key={field.name} {...field} />
+          <FormField
+            key={field.name}
+            {...field}
+            {...(isSidebar && field.name === "assunto" && initialSubject
+              ? { defaultValue: initialSubject }
+              : {})}
+          />
         ))}
 
         {type === "abrir-empresa" && (
@@ -120,11 +143,13 @@ export default function LeadForm({ type = "contato" }) {
           </label>
         )}
 
-        <div className="sm:col-span-2">
+        <div className={isSidebar ? "xl:col-span-2" : "sm:col-span-2"}>
           <FormField label="Mensagem" name="mensagem" required multiline />
         </div>
 
-        <label className="flex items-start gap-3 text-sm leading-6 text-muted sm:col-span-2">
+        <label
+          className={`flex items-start gap-3 text-sm leading-6 text-muted ${isSidebar ? "xl:col-span-2" : "sm:col-span-2"}`}
+        >
           <input
             name="autorizacao"
             value="sim"
@@ -140,7 +165,7 @@ export default function LeadForm({ type = "contato" }) {
       <Button
         type="submit"
         disabled={isLoading}
-        className="mt-7 w-full sm:w-auto"
+        className={isSidebar ? "mt-4 w-full" : "mt-7 w-full sm:w-auto"}
       >
         {isLoading && <LoaderCircle className="animate-spin" size={18} />}
         {isLoading ? "Enviando..." : "Enviar informações"}
