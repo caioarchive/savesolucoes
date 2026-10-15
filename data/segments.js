@@ -82,9 +82,8 @@ export const segments = [
     listing: {
       description:
         "Rotinas contábeis organizadas de acordo com a atividade e suas obrigações.",
-      image: "/images/segmento-profissionais-liberais.jpg",
-      imageAlt:
-        "Profissional independente trabalhando com notebook e anotações em um escritório",
+      image: "/images/segmento-profissionais-liberais.jpg?v=20261015",
+      imageAlt: "Pessoa trabalhando em um notebook em um escritório",
     },
   },
   {
@@ -93,9 +92,8 @@ export const segments = [
     listing: {
       description:
         "Acompanhamento contábil alinhado à rotina e às obrigações da atividade jurídica.",
-      image: "/images/segmento-advogados.jpg",
-      imageAlt:
-        "Profissionais do direito analisando documentos em um escritório",
+      image: "/images/segmento-advogados.jpg?v=20261015",
+      imageAlt: "Duas pessoas analisando um documento em um escritório",
     },
   },
   {
@@ -104,8 +102,8 @@ export const segments = [
     listing: {
       description:
         "Organização contábil e fiscal para acompanhar a rotina do estabelecimento.",
-      image: "/images/segmento-restaurantes.jpg",
-      imageAlt: "Equipe de restaurante organizando o estoque da cozinha",
+      image: "/images/segmento-restaurantes.jpg?v=20261015",
+      imageAlt: "Equipe preparando alimentos em uma cozinha profissional",
     },
   },
   {
@@ -114,9 +112,9 @@ export const segments = [
     listing: {
       description:
         "Acompanhamento das rotinas contábeis, fiscais e trabalhistas da operação.",
-      image: "/images/segmento-telecomunicacoes.jpg",
+      image: "/images/segmento-telecomunicacoes.jpg?v=20261015",
       imageAlt:
-        "Técnico organizando equipamentos de rede em uma sala de infraestrutura",
+        "Pessoa manuseando cabos de rede em equipamentos de telecomunicações",
     },
   },
 ];
