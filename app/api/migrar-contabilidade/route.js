@@ -6,8 +6,6 @@ export async function POST(request) {
     "tipoEmpresa",
     "telefone",
     "email",
-    "socios",
-    "funcionarios",
     "mensagem",
   ]);
 }

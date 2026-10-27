@@ -9,7 +9,7 @@ export const metadata = makeMetadata(
 );
 export default function Page() {
   return (
-    <>
+    <main>
       <PageHero
         eyebrow="Serviços"
         title="Soluções para organizar cada etapa da sua empresa."
@@ -17,6 +17,6 @@ export default function Page() {
       />
       <ServicesSection />
       <FinalCTA />
-    </>
+    </main>
   );
 }

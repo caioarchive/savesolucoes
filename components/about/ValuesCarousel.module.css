@@ -1,0 +1,107 @@
+.viewport {
+  position: relative;
+  overflow: hidden;
+  padding-inline: 1.5rem;
+}
+
+.dragLayer {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.dragLayer:active {
+  cursor: grabbing;
+}
+
+.track,
+.manualTrack {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+}
+
+.track {
+  animation: values-carousel-scroll 38s linear infinite;
+  will-change: transform;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+.manualViewport {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-color: rgb(255 255 255 / 0.28) transparent;
+  scrollbar-width: thin;
+}
+
+.manualTrack {
+  padding-bottom: 0.75rem;
+}
+
+.card {
+  display: flex;
+  width: min(85vw, 22rem);
+  min-height: 18rem;
+  flex: none;
+  scroll-snap-align: start;
+  flex-direction: column;
+}
+
+.fade {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: clamp(2rem, 6vw, 4.5rem);
+  pointer-events: none;
+}
+
+.fadeStart {
+  left: 0;
+  background: linear-gradient(90deg, rgb(10 10 10 / 0.96), transparent);
+}
+
+.fadeEnd {
+  right: 0;
+  background: linear-gradient(270deg, rgb(10 10 10 / 0.96), transparent);
+}
+
+@keyframes values-carousel-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-50% - 0.5rem), 0, 0);
+  }
+}
+
+@media (min-width: 640px) {
+  .viewport {
+    padding-inline: 2.5rem;
+  }
+
+  .card {
+    width: min(42vw, 24rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .viewport {
+    padding-inline: 3.5rem;
+  }
+
+  .card {
+    width: clamp(18rem, 25vw, 22.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    will-change: auto;
+  }
+}

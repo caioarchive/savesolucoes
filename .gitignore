@@ -1,5 +1,14 @@
 node_modules
 .next
+.open-next
+.wrangler
 .env*
 !.env.example
 npm-debug.log*
+.agents/
+.codex/
+.impeccable/
+.tmp/
+artifacts/
+skills-lock.json
+AGENTS.md

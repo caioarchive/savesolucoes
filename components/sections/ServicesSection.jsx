@@ -12,7 +12,7 @@ export default function ServicesSection({ limit }) {
   const visibleServices = limit ? services.slice(0, limit) : services;
 
   return (
-    <section className="section bg-surface">
+    <section className="bg-surface pb-12 pt-20 sm:pb-16 sm:pt-32">
       <Container>
         <SectionHeader
           eyebrow="O que fazemos"

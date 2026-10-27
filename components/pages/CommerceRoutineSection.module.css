@@ -1,0 +1,438 @@
+.section {
+  overflow: clip;
+  border-top: 1px solid #252525;
+  border-bottom: 1px solid #252525;
+  background: var(--ink);
+  color: #ffffff;
+  padding-block: 6rem 7rem;
+}
+
+.header {
+  max-width: 52rem;
+}
+
+.header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2.6rem, 4.7vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.journey {
+  display: grid;
+  grid-template-columns: minmax(0, 1.14fr) minmax(22rem, 0.86fr);
+  gap: clamp(4rem, 7vw, 7rem);
+  margin-top: clamp(5rem, 8vw, 7.5rem);
+}
+
+.visualColumn {
+  position: relative;
+  min-width: 0;
+}
+
+.stage {
+  position: sticky;
+  top: 8rem;
+  height: min(70vh, 42rem);
+  min-height: 34rem;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 1rem;
+  background: #171717;
+}
+
+.imageLayer {
+  position: absolute;
+  inset: 0;
+  will-change: transform, opacity;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.stageShade {
+  position: absolute;
+  inset: auto 0 0;
+  height: 38%;
+  background: linear-gradient(to top, rgb(0 0 0 / 68%), transparent);
+  pointer-events: none;
+}
+
+.caption {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.caption span:first-child {
+  font-variant-numeric: tabular-nums;
+}
+
+.caption span:last-child {
+  max-width: 18rem;
+  text-align: right;
+}
+
+.storyColumn {
+  position: relative;
+  min-width: 0;
+}
+
+.rail {
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  left: 0.3125rem;
+  width: 1px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 18%);
+}
+
+.railFill {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  transform-origin: top;
+  will-change: transform;
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  position: relative;
+  display: flex;
+  min-height: 56vh;
+  align-items: center;
+  padding-left: 3.25rem;
+}
+
+.node {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 50%;
+  width: 0.6875rem;
+  height: 0.6875rem;
+  border: 1px solid rgb(255 255 255 / 48%);
+  border-radius: 999px;
+  background: var(--ink);
+  transform: translateY(-50%);
+  transition:
+    background-color 220ms cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 220ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.step[data-active="true"] .node {
+  border-color: #ffffff;
+  background: #ffffff;
+  box-shadow: 0 0 0 5px rgb(255 255 255 / 9%);
+}
+
+.stepReveal {
+  max-width: 31rem;
+}
+
+.stepBody {
+  opacity: 0.42;
+  transition: opacity 260ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.step[data-active="true"] .stepBody {
+  opacity: 1;
+}
+
+.index {
+  display: inline-block;
+  color: rgb(255 255 255 / 58%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+
+.step h3 {
+  margin: 1.25rem 0 0;
+  color: rgb(255 255 255 / 72%);
+  font-size: clamp(1.75rem, 3vw, 2.65rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  transition: color 260ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.step[data-active="true"] h3 {
+  color: #ffffff;
+}
+
+.step p {
+  max-width: 32rem;
+  margin: 1.25rem 0 0;
+  color: rgb(255 255 255 / 70%);
+  font-size: 1.03rem;
+  line-height: 1.75;
+}
+
+.inlineImage {
+  position: relative;
+  display: none;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #171717;
+}
+
+.journey[data-has-media="false"] {
+  display: block;
+  max-width: 58rem;
+}
+
+.journey[data-has-media="false"] .rail {
+  top: 2.5rem;
+  bottom: 2.5rem;
+}
+
+.journey[data-has-media="false"] .step {
+  min-height: 34vh;
+  padding-block: 2rem 3rem;
+}
+
+.journey[data-has-media="false"] .node {
+  top: 2.5rem;
+}
+
+.journey[data-has-media="false"] .stepBody {
+  opacity: 1;
+}
+
+.journey[data-has-media="false"] .step h3 {
+  color: #ffffff;
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 5rem 6rem;
+  }
+
+  .header {
+    max-width: 45rem;
+  }
+
+  .header h2 {
+    font-size: clamp(2.5rem, 7.5vw, 4.4rem);
+    line-height: 1.02;
+  }
+
+  .journey {
+    display: block;
+    margin-top: 4.5rem;
+  }
+
+  .visualColumn {
+    display: none;
+  }
+
+  .storyColumn {
+    padding-left: 1.5rem;
+  }
+
+  .rail {
+    top: 8rem;
+    bottom: 8rem;
+  }
+
+  .step {
+    display: grid;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1.04fr) minmax(17rem, 0.96fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding: 0 0 5rem 2.75rem;
+  }
+
+  .step:last-child {
+    padding-bottom: 0;
+  }
+
+  .node {
+    top: clamp(6rem, 16vw, 8.5rem);
+  }
+
+  .inlineImage {
+    display: block;
+    aspect-ratio: 16 / 10;
+  }
+
+  .stepBody,
+  .step[data-active="true"] .stepBody {
+    opacity: 1;
+  }
+
+  .step h3 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+  }
+
+  .journey[data-has-media="false"] .step {
+    display: block;
+    min-height: 0;
+    padding: 0 0 4.5rem 2.75rem;
+  }
+
+  .journey[data-has-media="false"] .node {
+    top: 0.5rem;
+  }
+
+  .journey[data-has-media="false"] .rail {
+    top: 0.5rem;
+    bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .section {
+    padding-block: 4.5rem 5rem;
+  }
+
+  .header h2 {
+    font-size: clamp(2.35rem, 11.5vw, 3.3rem);
+    line-height: 1.02;
+  }
+
+  .journey {
+    margin-top: 3.5rem;
+  }
+
+  .storyColumn {
+    padding-left: 0.75rem;
+  }
+
+  .rail {
+    top: 6.5rem;
+    bottom: 6.5rem;
+  }
+
+  .step {
+    display: block;
+    padding: 0 0 4.5rem 2.25rem;
+  }
+
+  .step:last-child {
+    padding-bottom: 0;
+  }
+
+  .node {
+    top: 5.5rem;
+  }
+
+  .inlineImage {
+    aspect-ratio: 16 / 10;
+  }
+
+  .stepReveal {
+    margin-top: 1.75rem;
+  }
+
+  .step h3 {
+    margin-top: 1rem;
+    font-size: 1.85rem;
+  }
+
+  .step p {
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .journey[data-has-media="false"] .step {
+    padding: 0 0 4rem 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .journey {
+    display: block;
+  }
+
+  .visualColumn {
+    display: none;
+  }
+
+  .storyColumn {
+    padding-left: 1.5rem;
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .steps {
+    display: grid;
+    gap: 4.5rem;
+  }
+
+  .step {
+    display: grid;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1.1fr) minmax(22rem, 0.9fr);
+    gap: 4rem;
+    padding-left: 0;
+  }
+
+  .node {
+    display: none;
+  }
+
+  .inlineImage {
+    display: block;
+    aspect-ratio: 16 / 9;
+  }
+
+  .stepBody {
+    opacity: 1;
+  }
+
+  .journey[data-has-media="false"] .steps {
+    gap: 0;
+  }
+
+  .journey[data-has-media="false"] .step {
+    display: block;
+    min-height: 0;
+    padding: 0 0 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imageLayer,
+  .inlineImage,
+  .stepReveal,
+  .stepBody,
+  .node,
+  .step h3 {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .railFill {
+    transform: scaleY(1) !important;
+  }
+}

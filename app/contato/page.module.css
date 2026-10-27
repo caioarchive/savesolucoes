@@ -1,0 +1,9 @@
+.mapFrame {
+  height: 20rem;
+}
+
+@media (min-width: 640px) {
+  .mapFrame {
+    height: 24rem;
+  }
+}

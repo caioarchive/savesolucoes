@@ -1,6 +1,5 @@
 import { services } from "@/data/services";
 import { segments } from "@/data/segments";
-import { articles } from "@/data/articles";
 const base = "https://www.savesolucoes.com.br";
 export default function sitemap() {
   const fixed = [
@@ -10,7 +9,6 @@ export default function sitemap() {
     "/migrar-contabilidade",
     "/sobre",
     "/segmentos",
-    "/conteudos",
     "/contato",
     "/politica-de-privacidade",
     "/termos-de-uso",
@@ -29,10 +27,6 @@ export default function sitemap() {
     ...segments.map((x) => ({
       url: `${base}/segmentos/${x.slug}`,
       lastModified: new Date(),
-    })),
-    ...articles.map((x) => ({
-      url: `${base}/conteudos/${x.slug}`,
-      lastModified: new Date(x.date),
     })),
   ];
 }

@@ -8,11 +8,12 @@ export default function Button({
   type = "button",
   disabled = false,
   cursor,
+  onClick,
 }) {
   const baseClasses = [
-    "inline-flex min-h-12 items-center justify-center gap-2",
+    "inline-flex min-h-12 shrink-0 items-center justify-center gap-2 whitespace-nowrap",
     "rounded-full px-6 text-sm font-medium",
-    "transition duration-300",
+    "transition duration-300 active:scale-[0.98]",
     "focus-visible:outline-2 focus-visible:outline-offset-2",
     "focus-visible:outline-black",
     "disabled:cursor-not-allowed disabled:opacity-60",
@@ -60,6 +61,7 @@ export default function Button({
       type={type}
       disabled={disabled}
       data-cursor={cursor}
+      onClick={onClick}
     >
       {children}
     </button>

@@ -1,0 +1,418 @@
+.section {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  padding-block: 6rem 8rem;
+}
+
+.header {
+  max-width: 46rem;
+}
+
+.header h2 {
+  max-width: 23ch;
+  margin: 1.5rem 0 0;
+  color: var(--foreground);
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.journey {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(22rem, 0.88fr);
+  gap: clamp(4rem, 6vw, 6rem);
+  margin-top: clamp(2.75rem, 4vw, 4rem);
+}
+
+.storyColumn {
+  position: relative;
+  min-width: 0;
+}
+
+.rail {
+  position: absolute;
+  top: 3.5rem;
+  bottom: calc(54vh - 3.5rem);
+  left: 0.3125rem;
+  width: 1px;
+  overflow: hidden;
+  background: var(--border-strong);
+}
+
+.railFill {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform-origin: top;
+  will-change: transform;
+}
+
+.moments {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.moment {
+  position: relative;
+  display: flex;
+  min-height: 54vh;
+  align-items: flex-start;
+  padding: 2.75rem 0 0 3.25rem;
+}
+
+.moment::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 3.25rem;
+  height: 1px;
+  background: var(--border);
+  content: "";
+}
+
+.moment:last-child::after {
+  display: none;
+}
+
+.node {
+  position: absolute;
+  z-index: 2;
+  top: 3.5rem;
+  left: 0;
+  width: 0.6875rem;
+  height: 0.6875rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  transform: translateY(-50%);
+  transition:
+    background-color 220ms cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 220ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.moment[data-active="true"] .node {
+  border-color: var(--ink);
+  background: var(--ink);
+  box-shadow: 0 0 0 5px rgb(10 10 10 / 7%);
+}
+
+.momentReveal {
+  max-width: 30rem;
+  opacity: 0.48;
+  transition: opacity 240ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.moment[data-active="true"] .momentReveal {
+  opacity: 1;
+}
+
+.index {
+  display: inline-block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+
+.moment h3 {
+  margin: 1.25rem 0 0;
+  color: #73736f;
+  font-size: clamp(1.85rem, 3vw, 2.65rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  transition: color 240ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.moment[data-active="true"] h3 {
+  color: var(--foreground);
+}
+
+.moment p {
+  max-width: 31rem;
+  margin: 1.25rem 0 0;
+  color: #62625f;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.visualColumn {
+  position: relative;
+  min-width: 0;
+}
+
+.stage {
+  position: sticky;
+  top: 8rem;
+  height: min(66vh, 40rem);
+  min-height: 32rem;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 1rem;
+  background: var(--surface-secondary);
+}
+
+.mediaLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.mediaLayer {
+  will-change: transform, opacity;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.inlineMedia {
+  position: relative;
+  display: none;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 1rem;
+  background: var(--surface-secondary);
+}
+
+.journey[data-has-media="false"] {
+  display: block;
+  max-width: 58rem;
+}
+
+.journey[data-has-media="false"] .rail {
+  top: 3.5rem;
+  bottom: 3.5rem;
+}
+
+.journey[data-has-media="false"] .moment {
+  min-height: 32vh;
+  padding-block: 2.75rem 3rem;
+}
+
+.journey[data-has-media="false"] .momentReveal {
+  max-width: 43rem;
+  opacity: 1;
+}
+
+.journey[data-has-media="false"] .moment h3 {
+  color: var(--foreground);
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 5.5rem 6rem;
+  }
+
+  .header h2 {
+    max-width: 23ch;
+    font-size: clamp(2.25rem, 6vw, 3rem);
+  }
+
+  .journey {
+    display: block;
+    margin-top: 3.5rem;
+  }
+
+  .visualColumn {
+    display: none;
+  }
+
+  .storyColumn {
+    padding-left: 1.5rem;
+  }
+
+  .rail {
+    top: 8rem;
+    bottom: 8rem;
+  }
+
+  .moment {
+    display: block;
+    min-height: 0;
+    padding: 0 0 5rem 2.75rem;
+  }
+
+  .moment:last-child {
+    padding-bottom: 0;
+  }
+
+  .moment::after {
+    left: 2.75rem;
+  }
+
+  .moment:last-child::after {
+    display: none;
+  }
+
+  .node {
+    top: clamp(6rem, 16vw, 8.5rem);
+  }
+
+  .inlineMedia {
+    display: block;
+    aspect-ratio: 16 / 10;
+  }
+
+  .momentReveal,
+  .moment[data-active="true"] .momentReveal {
+    max-width: 38rem;
+    margin-top: 2rem;
+    opacity: 1;
+  }
+
+  .moment h3 {
+    font-size: clamp(1.8rem, 4.5vw, 2.35rem);
+  }
+
+  .journey[data-has-media="false"] .moment {
+    min-height: 0;
+    padding: 0 0 4.5rem 2.75rem;
+  }
+
+  .journey[data-has-media="false"] .momentReveal {
+    margin-top: 0;
+  }
+
+  .journey[data-has-media="false"] .node {
+    top: 0.5rem;
+  }
+
+  .journey[data-has-media="false"] .rail {
+    top: 0.5rem;
+    bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .section {
+    padding-block: 4.5rem 5rem;
+  }
+
+  .header h2 {
+    margin-top: 1.25rem;
+    font-size: clamp(2rem, 9vw, 2.65rem);
+    line-height: 1.08;
+  }
+
+  .journey {
+    margin-top: 3rem;
+  }
+
+  .storyColumn {
+    padding-left: 0.75rem;
+  }
+
+  .rail {
+    top: 5.5rem;
+    bottom: 5.5rem;
+  }
+
+  .moment {
+    padding: 0 0 4.5rem 2.25rem;
+  }
+
+  .moment::after {
+    left: 2.25rem;
+  }
+
+  .node {
+    top: 5rem;
+  }
+
+  .momentReveal {
+    margin-top: 1.75rem;
+  }
+
+  .moment h3 {
+    margin-top: 1rem;
+    font-size: 1.85rem;
+  }
+
+  .moment p {
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .journey[data-has-media="false"] .moment {
+    padding: 0 0 4rem 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .journey {
+    display: block;
+  }
+
+  .visualColumn {
+    display: none;
+  }
+
+  .storyColumn {
+    padding-left: 0;
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .moments {
+    display: grid;
+    gap: 4.5rem;
+  }
+
+  .moment {
+    display: grid;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1.08fr) minmax(22rem, 0.92fr);
+    gap: 4rem;
+    padding: 0;
+  }
+
+  .moment::after,
+  .node {
+    display: none;
+  }
+
+  .inlineMedia {
+    display: block;
+    aspect-ratio: 16 / 10;
+  }
+
+  .momentReveal {
+    margin-top: 0;
+    opacity: 1;
+  }
+
+  .journey[data-has-media="false"] .moments {
+    gap: 0;
+  }
+
+  .journey[data-has-media="false"] .moment {
+    display: block;
+    min-height: 0;
+    padding: 0 0 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediaLayer,
+  .inlineMedia,
+  .momentReveal,
+  .node,
+  .moment h3 {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .railFill {
+    transform: scaleY(1) !important;
+  }
+}
