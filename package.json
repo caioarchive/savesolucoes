@@ -2,6 +2,7 @@
   "name": "save-solucoes",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +10,7 @@
     "cloudflare:preview": "opennextjs-cloudflare preview",
     "cloudflare:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "start": "next start",
+    "test": "node --test",
     "lint": "eslint app components data lib --ext .js,.jsx",
     "format": "prettier --write \"{app,components,data,lib}/**/*.{js,jsx,css}\"",
     "format:check": "prettier --check \"{app,components,data,lib}/**/*.{js,jsx,css}\""
