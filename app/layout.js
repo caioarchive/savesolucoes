@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import MotionProvider from "@/components/motion/MotionProvider";
 import SmoothScroll from "@/components/providers/SmoothScroll";
+import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -65,6 +66,7 @@ export default function RootLayout({ children }) {
             {children}
             <Footer />
           </SmoothScroll>
+          <FloatingWhatsApp />
         </MotionProvider>
       </body>
     </html>
