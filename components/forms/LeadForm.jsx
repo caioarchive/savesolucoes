@@ -74,10 +74,13 @@ export default function LeadForm({
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(result.message);
+        throw new Error(
+          result.message ||
+            "Não foi possível enviar suas informações. Tente novamente.",
+        );
       }
 
       setStatus("success");
@@ -92,6 +95,7 @@ export default function LeadForm({
   return (
     <form
       onSubmit={handleSubmit}
+      aria-busy={isLoading}
       className={
         isSidebar
           ? "rounded-[22px] border border-border bg-white p-5 shadow-[0_18px_55px_rgba(0,0,0,0.04)] sm:p-6"
@@ -173,7 +177,8 @@ export default function LeadForm({
 
       {message && (
         <p
-          role="status"
+          role={status === "error" ? "alert" : "status"}
+          aria-live="polite"
           className="mt-5 flex items-center gap-2 rounded-xl bg-surface p-4 text-sm text-foreground"
         >
           {isSuccess && <CheckCircle2 size={18} />}

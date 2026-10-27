@@ -5,11 +5,17 @@
   "compatibility_date": "2026-10-27",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
+  "keep_vars": true,
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
   "images": {
     "binding": "IMAGES"
+  },
+  "previews": {
+    "images": {
+      "binding": "IMAGES"
+    }
   }
 }
