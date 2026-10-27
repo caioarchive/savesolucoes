@@ -12,5 +12,10 @@
   },
   "images": {
     "binding": "IMAGES"
+  },
+  "previews": {
+    "images": {
+      "binding": "IMAGES"
+    }
   }
 }
