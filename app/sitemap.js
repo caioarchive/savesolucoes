@@ -10,6 +10,7 @@ export default function sitemap() {
     "/sobre",
     "/segmentos",
     "/contato",
+    "/downloads",
     "/politica-de-privacidade",
     "/termos-de-uso",
   ];
