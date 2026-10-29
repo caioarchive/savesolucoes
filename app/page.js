@@ -12,6 +12,7 @@ import { siteUrl } from "@/lib/metadata";
 
 export const metadata = {
   alternates: { canonical: `${siteUrl}/` },
+  verification: { google: "Y8dnYqPbeznIywqc77xHrLgGeEBPwuBkguODRR8iXpc" },
 };
 
 export default function HomePage() {
