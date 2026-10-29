@@ -106,6 +106,7 @@ export default function Footer() {
                 Como chegar <ExternalLink size={14} aria-hidden="true" />
               </a>
               <a
+                id="acessos-do-cliente"
                 className={`inline-flex items-center gap-2 font-medium text-white ${footerLinkClass}`}
                 href="https://meucontador.nibo.com.br/"
                 target="_blank"
@@ -113,6 +114,20 @@ export default function Footer() {
                 data-cursor="↗"
               >
                 Área do cliente <ExternalLink size={14} aria-hidden="true" />
+              </a>
+              <a
+                className={`inline-flex min-h-11 items-center gap-2 leading-6 ${footerLinkClass}`}
+                href="https://prosoltecnologia.com.br/LancamentoEventos"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Lançamento de eventos da folha</span>
+                <ExternalLink
+                  size={14}
+                  className="shrink-0"
+                  aria-hidden="true"
+                />
+                <span className="sr-only">(abre em nova aba)</span>
               </a>
             </div>
           </div>
