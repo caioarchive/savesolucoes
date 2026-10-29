@@ -8,6 +8,11 @@ import SegmentsSection from "@/components/sections/SegmentsSection";
 import FAQSection from "@/components/sections/FAQSection";
 import FinalCTA from "@/components/sections/FinalCTA";
 import PageTransition from "@/components/motion/PageTransition";
+import { siteUrl } from "@/lib/metadata";
+
+export const metadata = {
+  alternates: { canonical: `${siteUrl}/` },
+};
 
 export default function HomePage() {
   return (
