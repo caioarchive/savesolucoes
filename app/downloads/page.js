@@ -58,6 +58,10 @@ export default function DownloadsPage() {
               </li>
             ))}
           </ul>
+          <p className="mt-8 max-w-2xl text-sm leading-6 text-neutral-600">
+            Estes modelos vieram do acervo do site anterior. Confira se o texto
+            está adequado ao seu caso antes de utilizar.
+          </p>
           <p className="mt-10 max-w-2xl text-base leading-7 text-neutral-600">
             Precisa de um desses modelos?{" "}
             <Link

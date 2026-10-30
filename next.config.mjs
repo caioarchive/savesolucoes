@@ -4,6 +4,26 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   async redirects() {
     const clientLinks = [
+      [
+        "/web-files/uploads/arquivo/site/33781c2e38e4da1c74ea2701e2c9e661.doc",
+        "/downloads/aviso-previo-empregador.doc",
+      ],
+      [
+        "/web-files/uploads/arquivo/site/b06059268ba30dd6cb1d439abdbf91f0.doc",
+        "/downloads/aviso-admissao-empregado.doc",
+      ],
+      [
+        "/web-files/uploads/arquivo/site/94ef712d364ceed05e4a21b4799c6eab.doc",
+        "/downloads/aviso-demissao-empregado.doc",
+      ],
+      [
+        "/web-files/uploads/arquivo/site/3de8cebf4cda15a7e9efdb926ad858ca.doc",
+        "/downloads/encaminhamento-ctps.doc",
+      ],
+      [
+        "/web-files/uploads/arquivo/site/d563f9f209179a31ab16210944828238.doc",
+        "/downloads/carta-advertencia-disciplinar.doc",
+      ],
       ["/site/ferramentascontabeis", "/ferramentas"],
       ["/site/downloads", "/downloads"],
       [
