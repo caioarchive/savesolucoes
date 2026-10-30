@@ -92,34 +92,34 @@ export default function UtilitariosPage() {
         aria-label="Links de utilitários"
       >
         <Container>
-          <div className="mx-auto grid max-w-5xl gap-5 lg:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2">
             {groups.map((group, index) => (
               <section
                 key={group.title}
-                className="rounded-[24px] border border-border-strong bg-white p-6 shadow-[0_8px_30px_rgba(20,20,20,0.035)] sm:p-7"
+                className="rounded-[28px] border border-border-strong bg-white p-7 shadow-[0_8px_30px_rgba(20,20,20,0.035)] sm:p-9"
                 aria-label={group.title}
               >
                 <span className="text-xs font-medium tracking-[0.16em] text-neutral-500">
                   {String(index + 1).padStart(2, "0")} / 04
                 </span>
-                <h2 className="mt-4 text-[1.35rem] tracking-[-0.02em] text-foreground">
+                <h2 className="mt-4 text-2xl tracking-[-0.02em] text-foreground sm:text-[1.75rem]">
                   {group.title}
                 </h2>
-                <p className="mt-1 text-sm leading-6 text-neutral-600">
+                <p className="mt-2 text-base leading-7 text-neutral-600">
                   {group.description}
                 </p>
-                <ul className="mt-6 grid gap-2">
+                <ul className="mt-7 grid gap-3">
                   {group.links.map(([label, href]) => (
                     <li key={href}>
                       <a
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex min-h-12 items-center justify-between gap-4 rounded-xl border border-border bg-surface px-4 py-2 text-sm font-medium leading-6 text-foreground transition-[border-color,background-color] duration-200 hover:border-neutral-400 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 motion-reduce:transition-none"
+                        className="flex min-h-14 items-center justify-between gap-4 rounded-xl border border-border bg-surface px-5 py-3 text-base font-medium leading-6 text-foreground transition-[border-color,background-color] duration-200 hover:border-neutral-400 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 motion-reduce:transition-none"
                       >
                         {label}
                         <ExternalLink
-                          size={15}
+                          size={17}
                           className="shrink-0"
                           aria-hidden="true"
                         />
@@ -133,7 +133,7 @@ export default function UtilitariosPage() {
               </section>
             ))}
           </div>
-          <p className="mx-auto mt-8 max-w-5xl text-sm leading-6 text-neutral-600">
+          <p className="mt-8 text-sm leading-6 text-neutral-600">
             Os links abrem sites externos. Confira a fonte e a data das
             informações antes de utilizá-las.
           </p>
