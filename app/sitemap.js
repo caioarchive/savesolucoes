@@ -11,6 +11,7 @@ export default function sitemap() {
     "/segmentos",
     "/contato",
     "/downloads",
+    "/ferramentas",
     "/politica-de-privacidade",
     "/termos-de-uso",
   ];
