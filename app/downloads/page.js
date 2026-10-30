@@ -31,38 +31,42 @@ export default function DownloadsPage() {
         className="bg-surface py-14 sm:py-20"
       >
         <Container>
-          <ul className="max-w-4xl border-t border-border-strong">
-            {downloads.map((item) => (
+          <ul className="grid gap-6 lg:grid-cols-2">
+            {downloads.map((item, index) => (
               <li
                 key={item.id}
-                className="flex flex-col items-start gap-3 border-b border-border-strong py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:py-7"
+                className="rounded-[28px] border border-border-strong bg-white p-7 shadow-[0_8px_30px_rgba(20,20,20,0.035)] sm:p-9"
               >
-                <h2 className="text-lg leading-7 text-foreground sm:text-xl">
+                <span className="text-xs font-medium tracking-[0.16em] text-neutral-500">
+                  {String(index + 1).padStart(2, "0")} /{" "}
+                  {String(downloads.length).padStart(2, "0")}
+                </span>
+                <h2 className="mt-4 text-xl leading-7 tracking-[-0.02em] text-foreground sm:text-2xl sm:leading-8">
                   {item.title}
                 </h2>
                 {item.file ? (
                   <a
                     href={item.file}
                     download
-                    className="inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-medium text-foreground underline decoration-neutral-400 underline-offset-4 transition-colors hover:decoration-neutral-950 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-950 motion-reduce:transition-none"
+                    className="mt-7 flex min-h-14 items-center justify-between gap-4 rounded-xl border border-border bg-surface px-5 py-3 text-base font-medium text-foreground transition-[border-color,background-color] duration-200 hover:border-neutral-400 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950 motion-reduce:transition-none"
                   >
-                    <Download size={17} aria-hidden="true" />
                     Baixar arquivo
                     <span className="sr-only">: {item.title}</span>
+                    <Download size={17} aria-hidden="true" />
                   </a>
                 ) : (
-                  <span className="shrink-0 text-sm text-neutral-600">
+                  <span className="mt-7 flex min-h-14 items-center rounded-xl border border-dashed border-border-strong px-5 py-3 text-base text-neutral-600">
                     Ainda não disponível
                   </span>
                 )}
               </li>
             ))}
           </ul>
-          <p className="mt-8 max-w-2xl text-sm leading-6 text-neutral-600">
+          <p className="mt-8 text-base leading-7 text-neutral-600">
             Estes modelos vieram do acervo do site anterior. Confira se o texto
             está adequado ao seu caso antes de utilizar.
           </p>
-          <p className="mt-10 max-w-2xl text-base leading-7 text-neutral-600">
+          <p className="mt-10 text-base leading-7 text-neutral-600">
             Precisa de um desses modelos?{" "}
             <Link
               href="/contato"
