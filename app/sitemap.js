@@ -12,6 +12,7 @@ export default function sitemap() {
     "/contato",
     "/downloads",
     "/ferramentas",
+    "/ferramentas/utilitarios",
     "/politica-de-privacidade",
     "/termos-de-uso",
   ];

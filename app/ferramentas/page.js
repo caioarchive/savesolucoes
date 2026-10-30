@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import Container from "@/components/layout/Container";
+import PageHero from "@/components/pages/PageHero";
 import { makeMetadata } from "@/lib/metadata";
 
 export const metadata = makeMetadata(
@@ -10,131 +11,113 @@ export const metadata = makeMetadata(
 );
 
 const resources = [
-  {
-    title: "Utilitários contábeis",
-    description: "Consultas oficiais de CPF, CNPJ e Simples Nacional.",
-    links: [
-      {
-        label: "Consultar CPF",
-        href: "https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/cpf",
-      },
-      {
-        label: "Consultar CNPJ",
-        href: "https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/cnpjreva_solicitacao.asp",
-      },
-      {
-        label: "Simples Nacional",
-        href: "https://www8.receita.fazenda.gov.br/SimplesNacional/",
-      },
-    ],
-  },
-  {
-    title: "Links úteis",
-    description:
-      "Lista de referências para a rotina contábil e administrativa, mantida por um fornecedor externo.",
-    links: [
-      {
-        label: "Abrir links úteis",
-        href: "http://idealsoftwares.com.br/links/links.html",
-      },
-    ],
-  },
-  {
-    title: "Downloads",
-    description:
-      "Consulte os modelos trabalhistas previstos; os arquivos serão adicionados quando estiverem disponíveis.",
-    links: [{ label: "Ver downloads", href: "/downloads" }],
-  },
-  {
-    title: "Agenda tributária",
-    description:
-      "Consulte a agenda publicada por um fornecedor externo e confirme os prazos aplicáveis à sua empresa.",
-    links: [
-      {
-        label: "Abrir agenda",
-        href: "http://www.idealsoftwares.com.br/agendas/index-.php",
-      },
-    ],
-  },
-  {
-    title: "Manual empresarial",
-    description: "Manual em PDF publicado por um fornecedor externo.",
-    links: [
-      {
-        label: "Abrir manual",
-        href: "http://idealsoftwares.com.br/links/manual_empresarial/Manual_empresarial.pdf",
-      },
-    ],
-  },
-  {
-    title: "Tabelas práticas",
-    description:
-      "Tabelas de referência publicadas por um fornecedor externo; confira a data e a fonte antes de usar.",
-    links: [
-      { label: "Abrir tabelas", href: "http://idealsoftwares.com.br/tabelas/" },
-    ],
-  },
+  [
+    "Utilitários contábeis",
+    "Consultas, certidões, impostos e indicadores reunidos por assunto.",
+    "Ver utilitários",
+    "/ferramentas/utilitarios",
+  ],
+  [
+    "Links úteis",
+    "Referências para a rotina contábil e administrativa em um portal externo.",
+    "Abrir links úteis",
+    "http://idealsoftwares.com.br/links/links.html",
+  ],
+  [
+    "Downloads",
+    "Modelos trabalhistas previstos. Os arquivos serão adicionados quando estiverem disponíveis.",
+    "Ver downloads",
+    "/downloads",
+  ],
+  [
+    "Agenda tributária",
+    "Consulte os compromissos tributários e confirme os prazos aplicáveis à sua empresa.",
+    "Abrir agenda",
+    "http://www.idealsoftwares.com.br/agendas/index-.php",
+  ],
+  [
+    "Manual empresarial",
+    "Acesse o manual empresarial em PDF publicado externamente.",
+    "Abrir manual",
+    "http://idealsoftwares.com.br/links/manual_empresarial/Manual_empresarial.pdf",
+  ],
+  [
+    "Tabelas práticas",
+    "Referências contábeis para consulta. Confira a data e a fonte antes de usar.",
+    "Abrir tabelas",
+    "http://idealsoftwares.com.br/tabelas/",
+  ],
 ];
+
+const cardClass =
+  "group flex h-full min-h-64 flex-col rounded-[24px] border border-border-strong bg-white p-7 shadow-[0_8px_30px_rgba(20,20,20,0.035)] transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-neutral-400 hover:shadow-[0_18px_40px_rgba(20,20,20,0.08)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-950 motion-reduce:transform-none motion-reduce:transition-none sm:p-8";
 
 export default function FerramentasPage() {
   return (
     <>
-      <section className="border-b border-border bg-white pb-16 pt-32 sm:pb-20 lg:pt-40">
-        <Container>
-          <h1 className="max-w-4xl text-balance text-4xl leading-[1.08] tracking-[-0.03em] text-foreground sm:text-5xl lg:text-6xl">
-            Ferramentas contábeis
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8">
-            Acessos para consultas, referências e modelos usados na rotina da
-            empresa.
-          </p>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Para sua rotina"
+        title="Ferramentas contábeis em um só lugar."
+        text="Encontre consultas, referências e modelos para apoiar o dia a dia da sua empresa."
+      />
       <section
         className="bg-surface py-14 sm:py-20"
         aria-label="Recursos contábeis"
       >
         <Container>
-          <ul className="max-w-4xl border-t border-border-strong">
-            {resources.map((resource) => (
-              <li
-                key={resource.title}
-                className="grid gap-4 border-b border-border-strong py-7 sm:grid-cols-[1fr_auto] sm:gap-8"
-              >
-                <div>
-                  <h2 className="text-xl text-foreground">{resource.title}</h2>
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-neutral-600">
-                    {resource.description}
+          <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {resources.map(([title, description, action, href], index) => {
+              const external = !href.startsWith("/");
+              const content = (
+                <>
+                  <span className="text-xs font-medium tracking-[0.16em] text-neutral-500">
+                    {String(index + 1).padStart(2, "0")} / 06
+                  </span>
+                  <h2 className="mt-8 text-[1.4rem] leading-tight tracking-[-0.02em] text-foreground">
+                    {title}
+                  </h2>
+                  <p className="mt-3 text-sm leading-6 text-neutral-600">
+                    {description}
                   </p>
-                </div>
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-1 sm:max-w-60 sm:flex-col sm:items-end sm:justify-center">
-                  {resource.links.map((link) =>
-                    link.href.startsWith("/") ? (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className="inline-flex min-h-11 items-center text-sm font-medium text-foreground underline underline-offset-4 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-950"
-                      >
-                        {link.label}
-                      </Link>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-9 text-sm font-semibold text-foreground">
+                    {action}
+                    {external ? (
+                      <ExternalLink size={16} aria-hidden="true" />
                     ) : (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-foreground underline underline-offset-4 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-950"
-                      >
-                        {link.label}
-                        <ExternalLink size={14} aria-hidden="true" />
-                        <span className="sr-only">(abre em nova aba)</span>
-                      </a>
-                    ),
+                      <ArrowUpRight size={16} aria-hidden="true" />
+                    )}
+                    {external && (
+                      <span className="sr-only">
+                        (site externo, abre em nova aba)
+                      </span>
+                    )}
+                  </span>
+                </>
+              );
+              return (
+                <li key={title}>
+                  {external ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cardClass}
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <Link href={href} className={cardClass}>
+                      {content}
+                    </Link>
                   )}
-                </div>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
+          <p className="mt-8 max-w-2xl text-sm leading-6 text-neutral-600">
+            Agenda, manual, tabelas e links úteis são publicados por terceiros.
+            Confira as informações na fonte antes de tomar decisões.
+          </p>
         </Container>
       </section>
     </>
