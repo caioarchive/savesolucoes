@@ -1,0 +1,3 @@
+# Arquivos estaticos ignoram os headers do Next.js; aplicar apenas no host temporario.
+https://:version.:subdomain.workers.dev/downloads/*
+  X-Robots-Tag: noindex
