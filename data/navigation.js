@@ -10,6 +10,7 @@ export const servicesNavigation = [
 
 export const navigation = [
   { label: "Serviços", type: "services" },
+  { label: "Ferramentas", href: "/ferramentas" },
   { label: "Abrir ou migrar", type: "business" },
   { label: "Sobre", href: "/sobre" },
   { label: "Contato", href: "/contato" },
@@ -21,6 +22,7 @@ export const businessNavigation = [
 ];
 
 export const footerNavigation = [
+  { label: "Ferramentas", href: "/ferramentas" },
   { label: "Downloads", href: "/downloads" },
   { label: "Serviços", href: "/servicos" },
   { label: "Segmentos", href: "/segmentos" },
