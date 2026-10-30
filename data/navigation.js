@@ -21,6 +21,7 @@ export const businessNavigation = [
 ];
 
 export const footerNavigation = [
+  { label: "Downloads", href: "/downloads" },
   { label: "Serviços", href: "/servicos" },
   { label: "Segmentos", href: "/segmentos" },
   ...businessNavigation,

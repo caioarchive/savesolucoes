@@ -4,6 +4,7 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   async redirects() {
     const clientLinks = [
+      ["/site/downloads", "/downloads"],
       [
         "/site/pagina-adicional/53/lancamento-de-eventos",
         "/contato#acessos-do-cliente",
